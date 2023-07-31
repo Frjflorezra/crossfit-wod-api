@@ -1,60 +1,20 @@
 const express = require("express");
-const apicache = require("apicache");
-const workoutController = require("../../controllers/workoutController");
-const recordController = require("../../controllers/recordControllers");
+// const apicache = require("apicache");
+const tareaController = require("../../controllers/tareaController");
 
 const router = express.Router();
-const cache = apicache.middleware;
+// const cache = apicache.middleware;
 
 router
-  /**
-   * @openapi
-   * /api/v1/workouts:
-   *   get:
-   *     tags:
-   *       - Workouts
-   *     responses:
-   *       200:
-   *         description: OK
-   *         content:
-   *           application/json:
-   *               schema:
-   *               type: object
-   *               properties:
-   *                 status:
-   *                   type: string
-   *                   example: OK
-   *                 data:
-   *                   type: array
-   *                   items:
-   *                      $ref: "#/components/schemas/Workout"
-   *       5XX:
-   *         description: FAILED
-   *         content:
-   *           application/json:
-   *             schema:
-   *               type: object
-   *               properties:
-   *                 status:
-   *                   type: string
-   *                   example: FAILED
-   *                 data:
-   *                   type: object
-   *                   properties:
-   *                     error:
-   *                       type: string
-   *                       example: "Some error message"
-   */
-  .get("/", workoutController.getAllWorkouts)
 
-  .get("/:workoutId", workoutController.getOneWorkout)
+  .get("/", tareaController.getAllTareas)
 
-  .get("/:workoutId/records", recordController.getRecordForWorkout)
+  .get("/:_id", tareaController.getOneTarea)
 
-  .post("/", workoutController.createNewWorkout)
+  .post("/", tareaController.createNewTarea)
 
-  .patch("/:workoutId", workoutController.updateOneWorkout)
+  .patch("/:_id", tareaController.updateOneTarea)
 
-  .delete("/:workoutId", workoutController.deleteOneWorkout);
+  .delete("/:_id", tareaController.deleteOneTarea);
 
 module.exports = router;
